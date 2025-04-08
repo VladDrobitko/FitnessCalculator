@@ -5,12 +5,15 @@
 //  Created by Владислав Дробитько on 04/04/2025.
 //
 import SwiftUI
+import SwiftData
 
 struct CalculatorCaloriesView: View {
     let calculatorType: String
     var onSave: (String, String) -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+
     
     @State private var isPressed = false
     @State private var isSavePressed = false
@@ -153,9 +156,24 @@ struct CalculatorCaloriesView: View {
                             withAnimation(.easeInOut(duration: 0.1)) {
                                 isSavePressed = true
                             }
+                            
+                            // Форматируем результат для ключ-значение (оставляем для совместимости)
                             let formattedResult = "tdee=\(tdee);goalCalories=\(goalCalories);goal=\(goal.rawValue)"
-                            onSave("Calories", formattedResult)
+                            
+                            // Создаем запись истории
+                            let historyEntry = CalculationHistory(title: "Calories", result: formattedResult)
+                            
+                            // Явно устанавливаем структурированные данные
+                            historyEntry.calories = CaloriesData(
+                                tdee: tdee,
+                                goalCalories: goalCalories,
+                                goal: goal.rawValue
+                            )
+                            
+                            // Сохраняем запись
+                            modelContext.insert(historyEntry)
                             dismiss()
+                            
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 isSavePressed = false
                             }

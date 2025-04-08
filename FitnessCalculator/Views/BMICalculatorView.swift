@@ -87,7 +87,10 @@ struct BMICalculatorView: View {
                 // Save button
                 if bmiResult > 0 {
                     Button(action: {
-                        onSave("BMI", "bmi=\(bmiResult)")
+                        let formattedResult = "bmi=\(bmiResult)"
+                        let historyEntry = CalculationHistory(title: "BMI", result: formattedResult)
+                        historyEntry.bmi = BMIData(bmi: bmiResult)
+                        onSave("BMI", formattedResult)
                         dismiss()
                     }) {
                         Text("Save Result")

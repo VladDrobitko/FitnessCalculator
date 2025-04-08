@@ -89,10 +89,14 @@ struct CalculatorMacrosView: View {
                 // Result Card
                 if showResult, let result = result {
                     VStack(alignment: .leading, spacing: 8) {
-                        
-
                         Button(action: {
                             let formatted = "protein=\(result.protein);fat=\(result.fat);carbs=\(result.carbs)"
+                            let historyEntry = CalculationHistory(title: "Macros", result: formatted)
+                            historyEntry.macros = MacrosData(
+                                protein: Double(result.protein),
+                                fat: Double(result.fat),
+                                carbs: Double(result.carbs)
+                            )
                             onSave("Macros", formatted)
                             dismiss()
                         }) {

@@ -41,13 +41,13 @@ struct CalculationDetailView: View {
                     // Результат с визуализацией
                     switch CalculatorType(title: entry.title) {
                     case .calories:
-                        caloriesDetailedView(result: entry.result)
+                        caloriesDetailedView()
                     case .macros:
-                        macrosDetailedView(result: entry.result)
+                        macrosDetailedView()
                     case .bmi:
-                        bmiDetailedView(result: entry.result)
+                        bmiDetailedView()
                     case .water:
-                        waterDetailedView(result: entry.result)
+                        waterDetailedView()
                     }
 
                     Spacer()
@@ -173,16 +173,9 @@ struct CalculationDetailView: View {
     
     // MARK: - Detailed Views
     
-    private func caloriesDetailedView(result: String) -> some View {
-        let dict = parseResult(result)
-        
-        if let tdeeStr = dict["tdee"],
-           let goalCaloriesStr = dict["goalCalories"],
-           let goalStr = dict["goal"],
-           let tdee = Double(tdeeStr),
-           let goalCalories = Double(goalCaloriesStr),
-           let goal = Goal(rawValue: goalStr) {
-            // Предположим средний вес 75кг для демонстрации
+    private func caloriesDetailedView() -> some View {
+        // Сначала проверяем, есть ли структурированные данные
+        if let caloriesData = entry.calories {
             return AnyView(
                 VStack(spacing: 20) {
                     Text("Your result:")
@@ -190,38 +183,57 @@ struct CalculationDetailView: View {
                         .foregroundColor(.white)
                         
                     CaloriesProgressChart(
-                        tdee: tdee,
-                        goalCalories: goalCalories,
-                        goal: goal,
-                        currentWeight: 75 // Примерный вес
+                        tdee: caloriesData.tdee,
+                        goalCalories: caloriesData.goalCalories,
+                        goal: Goal(rawValue: caloriesData.goal) ?? .maintain,
+                        currentWeight: 75 // Стандартное значение для демонстрации
                     )
                 }
             )
         } else {
-            return AnyView(
-                VStack(spacing: 10) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    Text(result)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding(.top, 16)
-                }
-            )
+            // Резервный вариант - парсинг строки
+            let dict = parseResult(entry.result)
+            
+            if let tdeeStr = dict["tdee"],
+               let goalCaloriesStr = dict["goalCalories"],
+               let goalStr = dict["goal"],
+               let tdee = Double(tdeeStr),
+               let goalCalories = Double(goalCaloriesStr),
+               let goal = Goal(rawValue: goalStr) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        CaloriesProgressChart(
+                            tdee: tdee,
+                            goalCalories: goalCalories,
+                            goal: goal,
+                            currentWeight: 75 // Примерный вес
+                        )
+                    }
+                )
+            } else {
+                return AnyView(
+                    VStack(spacing: 10) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        Text(entry.result)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(.top, 16)
+                    }
+                )
+            }
         }
     }
     
-    private func macrosDetailedView(result: String) -> some View {
-        let dict = parseResult(result)
-        
-        if let proteinStr = dict["protein"],
-           let fatStr = dict["fat"],
-           let carbsStr = dict["carbs"],
-           let protein = Double(proteinStr),
-           let fat = Double(fatStr),
-           let carbs = Double(carbsStr) {
+    private func macrosDetailedView() -> some View {
+        // Сначала проверяем структурированные данные
+        if let macrosData = entry.macros {
             return AnyView(
                 VStack(spacing: 20) {
                     Text("Your result:")
@@ -229,109 +241,156 @@ struct CalculationDetailView: View {
                         .foregroundColor(.white)
                         
                     MacrosPieChart(
-                        protein: protein,
-                        fat: fat,
-                        carbs: carbs
+                        protein: macrosData.protein,
+                        fat: macrosData.fat,
+                        carbs: macrosData.carbs
                     )
                 }
             )
         } else {
-            return AnyView(
-                VStack(spacing: 10) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    Text(result)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding(.top, 16)
-                }
-            )
+            // Резервный вариант - парсинг строки
+            let dict = parseResult(entry.result)
+            
+            if let proteinStr = dict["protein"],
+               let fatStr = dict["fat"],
+               let carbsStr = dict["carbs"],
+               let protein = Double(proteinStr),
+               let fat = Double(fatStr),
+               let carbs = Double(carbsStr) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        MacrosPieChart(
+                            protein: protein,
+                            fat: fat,
+                            carbs: carbs
+                        )
+                    }
+                )
+            } else {
+                return AnyView(
+                    VStack(spacing: 10) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        Text(entry.result)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(.top, 16)
+                    }
+                )
+            }
         }
     }
     
-    private func bmiDetailedView(result: String) -> some View {
-        let dict = parseResult(result)
-        
-        if let bmiStr = dict["bmi"], let bmi = Double(bmiStr) {
+    private func bmiDetailedView() -> some View {
+        // Сначала проверяем структурированные данные
+        if let bmiData = entry.bmi {
             return AnyView(
                 VStack(spacing: 20) {
                     Text("Your result:")
                         .font(.headline)
                         .foregroundColor(.white)
                         
-                    BMIScaleView(bmi: bmi)
-                }
-            )
-        } else if let bmi = Double(result) {
-            return AnyView(
-                VStack(spacing: 20) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    BMIScaleView(bmi: bmi)
+                    BMIScaleView(bmi: bmiData.bmi)
                 }
             )
         } else {
-            return AnyView(
-                VStack(spacing: 10) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    Text(result)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding(.top, 16)
-                }
-            )
+            // Резервный вариант - парсинг строки
+            let dict = parseResult(entry.result)
+            
+            if let bmiStr = dict["bmi"], let bmi = Double(bmiStr) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        BMIScaleView(bmi: bmi)
+                    }
+                )
+            } else if let bmi = Double(entry.result) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        BMIScaleView(bmi: bmi)
+                    }
+                )
+            } else {
+                return AnyView(
+                    VStack(spacing: 10) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        Text(entry.result)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(.top, 16)
+                    }
+                )
+            }
         }
     }
     
-    private func waterDetailedView(result: String) -> some View {
-        let dict = parseResult(result)
-        
-        if let waterStr = dict["result"], let water = Double(waterStr) {
+    private func waterDetailedView() -> some View {
+        // Сначала проверяем структурированные данные
+        if let waterData = entry.water {
             return AnyView(
                 VStack(spacing: 20) {
                     Text("Your result:")
                         .font(.headline)
                         .foregroundColor(.white)
                         
-                    waterDiagramView(dailyIntake: water)
-                }
-            )
-        } else if let water = Double(result) {
-            return AnyView(
-                VStack(spacing: 20) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    waterDiagramView(dailyIntake: water)
+                    WaterGlassDiagram(dailyIntake: waterData.dailyIntake)
                 }
             )
         } else {
-            return AnyView(
-                VStack(spacing: 10) {
-                    Text("Your result:")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        
-                    Text(result)
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding(.top, 16)
-                }
-            )
+            // Резервный вариант - парсинг строки
+            let dict = parseResult(entry.result)
+            
+            if let waterStr = dict["result"], let water = Double(waterStr) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        WaterGlassDiagram(dailyIntake: water)
+                    }
+                )
+            } else if let water = Double(entry.result) {
+                return AnyView(
+                    VStack(spacing: 20) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        WaterGlassDiagram(dailyIntake: water)
+                    }
+                )
+            } else {
+                return AnyView(
+                    VStack(spacing: 10) {
+                        Text("Your result:")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            
+                        Text(entry.result)
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(.top, 16)
+                    }
+                )
+            }
         }
-    }
-    
-    // Новая визуализация для потребления воды
-    private func waterDiagramView(dailyIntake: Double) -> some View {
-        WaterGlassDiagram(dailyIntake: dailyIntake)
     }
 
     // MARK: - Объяснения для разных калькуляторов

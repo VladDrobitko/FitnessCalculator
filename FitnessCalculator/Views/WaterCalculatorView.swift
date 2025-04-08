@@ -128,7 +128,10 @@ struct WaterCalculatorView: View {
                 // Save button
                 if !resultText.isEmpty {
                     Button(action: {
-                        onSave("Water Intake", "result=\(waterIntake)")
+                        let formattedResult = "result=\(waterIntake)"
+                        let historyEntry = CalculationHistory(title: "Water Intake", result: formattedResult)
+                        historyEntry.water = WaterData(dailyIntake: waterIntake)
+                        onSave("Water Intake", formattedResult)
                         dismiss()
                     }) {
                         Text("Save Result")
