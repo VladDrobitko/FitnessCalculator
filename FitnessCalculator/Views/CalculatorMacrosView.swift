@@ -76,20 +76,20 @@ struct CalculatorMacrosView: View {
                         .scaleEffect(animateButton ? 0.96 : 1.0)
                         .animation(.easeInOut(duration: 0.2), value: animateButton)
                 }
+                // В CalculatorMacrosView добавить:
+                if let result = result {
+                    MacrosPieChart(
+                        protein: Double(result.protein),
+                        fat: Double(result.fat),
+                        carbs: Double(result.carbs)
+                    )
+                    .padding(.top, 12)
+                }
 
                 // Result Card
                 if showResult, let result = result {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Result for \(result.description):")
-                            .font(.headline)
-                            .foregroundColor(.white)
-
-                        VStack(alignment: .leading, spacing: 4) {
-                            Label("Protein: \(result.protein)g", systemImage: "flame.fill")
-                            Label("Fat: \(result.fat)g", systemImage: "drop.fill")
-                            Label("Carbs: \(result.carbs)g", systemImage: "leaf.fill")
-                        }
-                        .foregroundColor(.green)
+                        
 
                         Button(action: {
                             let formatted = "protein=\(result.protein);fat=\(result.fat);carbs=\(result.carbs)"
@@ -106,9 +106,7 @@ struct CalculatorMacrosView: View {
                                 .scaleEffect(animateButton ? 0.96 : 1.0)
                         }
                     }
-                    .padding()
-                    .background(Color.white.opacity(0.05))
-                    .cornerRadius(15)
+                    
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
 

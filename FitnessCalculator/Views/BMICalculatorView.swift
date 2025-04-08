@@ -76,6 +76,12 @@ struct BMICalculatorView: View {
                             .foregroundColor(.green)
                     }
                     .padding(.top, 12)
+                    
+                    // В BMICalculatorView добавить:
+                    if bmiResult > 0 {
+                        BMIScaleView(bmi: bmiResult)
+                            .padding(.top, 12)
+                    }
                 }
                 
                 // Save button

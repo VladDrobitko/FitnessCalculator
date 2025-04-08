@@ -134,27 +134,20 @@ struct CalculatorCaloriesView: View {
 
                 
 
-                // ... весь остальной код без изменений ...
+                // В CalculatorCaloriesView добавить:
+                
 
                 // Заменяем блок result + save button:
                 if !resultText.isEmpty {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("TDEE")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        Text("\(Int(tdee)) kcal/day")
-                            .font(.title3)
-                            .bold()
-                            .foregroundColor(.white)
-                        
-                        Text("Goal (\(goal.description))")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                            .padding(.top, 8)
-                        Text("\(Int(goalCalories)) kcal/day")
-                            .font(.title3)
-                            .bold()
-                            .foregroundColor(.green)
+                        if let currentWeight = Double(weight) {
+                                    CaloriesProgressChart(
+                                        tdee: tdee,
+                                        goalCalories: goalCalories,
+                                        goal: goal,
+                                        currentWeight: currentWeight
+                                    )
+                                }
                         
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.1)) {
@@ -177,9 +170,7 @@ struct CalculatorCaloriesView: View {
                                 .scaleEffect(isSavePressed ? 0.97 : 1.0)
                         }
                     }
-                    .padding()
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(16)
+                    
                 }
 
 
