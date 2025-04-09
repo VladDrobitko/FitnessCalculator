@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		3F1916022DA03541009E4E6E /* FitnessCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F1916022DA03541009E4E6E /* FitFormula.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitFormula.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3F1916C52DA71A92009E4E6E /* Exceptions for "FitFormula" folder in "FitFormula" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3F1916012DA03541009E4E6E /* FitFormula */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3F1916042DA03541009E4E6E /* FitnessCalculator */ = {
+		3F1916042DA03541009E4E6E /* FitFormula */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = FitnessCalculator;
+			exceptions = (
+				3F1916C52DA71A92009E4E6E /* Exceptions for "FitFormula" folder in "FitFormula" target */,
+			);
+			path = FitFormula;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +45,7 @@
 		3F1915F92DA03541009E4E6E = {
 			isa = PBXGroup;
 			children = (
-				3F1916042DA03541009E4E6E /* FitnessCalculator */,
+				3F1916042DA03541009E4E6E /* FitFormula */,
 				3F1916032DA03541009E4E6E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +53,7 @@
 		3F1916032DA03541009E4E6E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F1916022DA03541009E4E6E /* FitnessCalculator.app */,
+				3F1916022DA03541009E4E6E /* FitFormula.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3F1916012DA03541009E4E6E /* FitnessCalculator */ = {
+		3F1916012DA03541009E4E6E /* FitFormula */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F1916102DA03543009E4E6E /* Build configuration list for PBXNativeTarget "FitnessCalculator" */;
+			buildConfigurationList = 3F1916102DA03543009E4E6E /* Build configuration list for PBXNativeTarget "FitFormula" */;
 			buildPhases = (
 				3F1915FE2DA03541009E4E6E /* Sources */,
 				3F1915FF2DA03541009E4E6E /* Frameworks */,
@@ -61,13 +74,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				3F1916042DA03541009E4E6E /* FitnessCalculator */,
+				3F1916042DA03541009E4E6E /* FitFormula */,
 			);
-			name = FitnessCalculator;
+			name = FitFormula;
 			packageProductDependencies = (
 			);
 			productName = FitnessCalculator;
-			productReference = 3F1916022DA03541009E4E6E /* FitnessCalculator.app */;
+			productReference = 3F1916022DA03541009E4E6E /* FitFormula.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3F1916012DA03541009E4E6E /* FitnessCalculator */,
+				3F1916012DA03541009E4E6E /* FitFormula */,
 			);
 		};
 /* End PBXProject section */
@@ -251,13 +264,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FitnessCalculator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FitFormula/Preview Content\"";
 				DEVELOPMENT_TEAM = LHJ4VA8TB7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitFormula/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitFormula;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -266,7 +281,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drobitko.FitnessCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drobitko.FitFormula;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -285,13 +300,15 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FitnessCalculator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"FitFormula/Preview Content\"";
 				DEVELOPMENT_TEAM = LHJ4VA8TB7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitFormula/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitFormula;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -300,7 +317,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drobitko.FitnessCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drobitko.FitFormula;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -324,7 +341,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F1916102DA03543009E4E6E /* Build configuration list for PBXNativeTarget "FitnessCalculator" */ = {
+		3F1916102DA03543009E4E6E /* Build configuration list for PBXNativeTarget "FitFormula" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3F1916112DA03543009E4E6E /* Debug */,

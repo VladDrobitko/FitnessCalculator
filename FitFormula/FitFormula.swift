@@ -8,10 +8,33 @@ import SwiftUI
 import SwiftData
 
 @main
-struct FitnessCalculatorApp: App {
+struct FitFormulaApp: App {
+    
+    @State private var isShowingSplash = true
+    
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            ZStack {
+                // Основной контент приложения
+                MainTabView()
+                    .opacity(isShowingSplash ? 0 : 1) // Скрываем основной контент во время сплеш-скрина
+                
+                // Сплеш-скрин поверх основного контента
+                if isShowingSplash {
+                    SplashScreenView()
+                        .transition(.opacity)
+                        .animation(.easeOut(duration: 0.5), value: isShowingSplash)
+                        .onAppear {
+                            // Задержка перед скрытием
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                withAnimation {
+                                    isShowingSplash = false
+                                }
+                            }
+                        }
+                        .zIndex(1) // Гарантируем, что сплеш будет поверх всего
+                }
+            }
         }
         .modelContainer(for: CalculationHistory.self)
     }
@@ -63,4 +86,18 @@ struct CalculationHistoryMigrationPlan: SchemaMigrationPlan {
             print("Миграция завершена успешно")
         }
     )
+}
+
+struct SplashScreenView: View {
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            
+            Image("logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 265, height: 190)
+        }
+        .edgesIgnoringSafeArea(.all) // Заполняем весь экран
+    }
 }
