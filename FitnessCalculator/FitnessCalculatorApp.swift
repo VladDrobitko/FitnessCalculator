@@ -11,7 +11,7 @@ import SwiftData
 struct FitnessCalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            FitnessCalculatorView()
+            MainTabView()
         }
         .modelContainer(for: CalculationHistory.self)
     }

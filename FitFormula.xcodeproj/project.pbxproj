@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3F1915FD2DA03541009E4E6E /* Build configuration list for PBXProject "FitnessCalculator" */;
+			buildConfigurationList = 3F1915FD2DA03541009E4E6E /* Build configuration list for PBXProject "FitFormula" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -315,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F1915FD2DA03541009E4E6E /* Build configuration list for PBXProject "FitnessCalculator" */ = {
+		3F1915FD2DA03541009E4E6E /* Build configuration list for PBXProject "FitFormula" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3F19160E2DA03543009E4E6E /* Debug */,

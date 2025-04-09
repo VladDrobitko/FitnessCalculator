@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalculatorType: String {
+enum CalculatorType: String, CaseIterable {
     case calories = "Calories"
     case macros = "Macros"
     case bmi = "BMI"
