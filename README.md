@@ -38,8 +38,12 @@ The FitFormula project is organized as follows:
 - **`StatisticsView.swift`:** Responsible for presenting historical data and charts, enabling users to visualize their fitness trends over time.
 
 ## Screenshots
-
-(Please add screenshots of the main app views here to showcase the UI. For example: Calculator selection screen, individual calculator views, history view, statistics view with charts.)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 02 11](https://github.com/user-attachments/assets/1ed5640a-6908-4a0e-a5f0-f43e399f6fcc)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 02 30](https://github.com/user-attachments/assets/1cbbbb70-afae-4805-be9c-5ce767a1d519)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 02 55](https://github.com/user-attachments/assets/e921f10e-173d-4492-ad2f-e647840f9e9f)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 03 21](https://github.com/user-attachments/assets/fb56ad2e-a4ba-410b-9e9a-2b624f2a1700)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 03 44](https://github.com/user-attachments/assets/46f5589c-b26c-44ac-93c5-fdca1f160f3b)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-21 at 16 04 27](https://github.com/user-attachments/assets/c76fd626-5afe-46e9-b0ae-6bc5c1fc09d3)
 
 ## How to Build/Run
 
